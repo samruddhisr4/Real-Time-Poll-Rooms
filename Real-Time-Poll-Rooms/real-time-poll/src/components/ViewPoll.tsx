@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { Share2, CheckCircle2, AlertCircle, Loader2, Copy } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, Copy } from 'lucide-react';
 
 
 // Helper to generate browser fingerprint
@@ -81,7 +81,7 @@ export function ViewPoll() {
             if (pollError) throw pollError;
             setPoll(pollData);
 
-            const { data: optionsData, error: optionsError } = await supabase
+            const { data: optionsData } = await supabase
                 .from('options')
                 .select('*')
                 .eq('poll_id', id)
@@ -223,9 +223,4 @@ export function ViewPoll() {
         </div >
     );
 }
-
-function max(a: number, b: number) {
-    return a > b ? a : b;
-}
-
 
